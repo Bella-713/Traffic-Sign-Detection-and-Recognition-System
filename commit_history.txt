@@ -1,0 +1,13 @@
+﻿4fb40db chore: 添加 .gitignore，排除模型权重与生成文件 (6 minutes ago)
+87f1c7e docs: 添加Jupyter演示Notebook (7 minutes ago)
+608d244 feat: 实现综合评估引擎（损失曲线/混淆矩阵/场景分析/误检分析） (7 minutes ago)
+cffebcf feat: 实现基准模型与改进策略训练管线 (7 minutes ago)
+65ff6cf feat: 实现YOLOv8模型封装（训练/评估/预测/ONNX导出） (7 minutes ago)
+4f931bb feat: 实现GTSDB数据处理工具（43→5类映射与YOLO格式转换） (7 minutes ago)
+5c7c0a2 docs: 添加项目文档、依赖清单与成员分工声明 (7 minutes ago)
+06521ff chore: 添加 .gitignore，排除模型权重与生成文件 (8 minutes ago)
+
+========================================
+提交总数: 8 次
+========================================
+
