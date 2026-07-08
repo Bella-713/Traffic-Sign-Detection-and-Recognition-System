@@ -1,0 +1,59 @@
+# ==========================================
+# 交通标志检测与识别系统 — Python 依赖
+# 安装: pip install -r requirements.txt
+# PyTorch 建议单独安装（见 README）
+# ==========================================
+
+# YOLOv8 目标检测框架
+# 提供 YOLO 模型定义、训练、验证、预测、导出全流程 API
+# 封装了 YOLOv8n/s/m/l/x 系列模型，支持自动下载预训练权重
+ultralytics>=8.0.0
+
+# OpenCV 计算机视觉库
+# 用于: 读取图片(cv2.imread)、格式转换(cv2.cvtColor)、
+#       绘制检测框与标注、拉普拉斯模糊度计算(cv2.Laplacian)
+opencv-python>=4.8.0
+
+# Matplotlib 图表绘制
+# 用于: 训练损失曲线、精度/召回率曲线、混淆矩阵可视化、
+#       误检/漏检案例对比图、场景对比表格
+matplotlib>=3.7.0
+
+# Seaborn 统计图表增强
+# 用于: 混淆矩阵热力图(sns.heatmap)，美化图表配色与样式
+seaborn>=0.12.0
+
+# Scikit-learn 机器学习工具库
+# 用于: 评估指标计算（如分类报告）、数据分析辅助
+scikit-learn>=1.2.0
+
+# Pandas 数据处理
+# 用于: 读取训练日志 results.csv，处理评估结果数据
+pandas>=1.5.0
+
+# Pillow 图像处理库
+# Matplotlib 底层依赖，用于图像文件的读取与保存
+pillow>=9.5.0
+
+# Tqdm 进度条工具
+# 用于: 训练和数据处理过程中的进度显示
+tqdm>=4.65.0
+
+# PyYAML YAML 解析
+# 用于: 读取 YOLO 数据集配置文件 data.yaml（含路径、类别数、类别名）
+pyyaml>=6.0
+
+# Albumentations 数据增强库
+# 用于: 改进策略中的高级图像增强（随机亮度对比度、
+#       高斯模糊、高斯噪声、Gamma 校正等）
+albumentations>=1.3.0
+
+# ==========================================
+# PyTorch 深度学习框架
+# 建议根据 CUDA 版本单独安装，以获得最佳 GPU 加速:
+#   CUDA 12.6: pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
+#   CPU 版:    pip install torch torchvision
+# 本系统依赖 torch 进行 GPU 加速训练与推理
+# ==========================================
+torch>=2.0.0
+torchvision>=0.15.0
