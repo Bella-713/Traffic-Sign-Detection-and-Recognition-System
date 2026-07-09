@@ -126,7 +126,21 @@ python code\train.py --dataset ../dataset   # 指定数据集路径
 python code\train_baseline.py
 ```
 
-### 3. 模型评估与可视化
+### 3. 测试推理
+
+使用训练好的模型对单张图片进行检测推理：
+
+```bash
+python -c "from model import TrafficSignDetector; d = TrafficSignDetector(); r = d.predict('path/to/image.jpg', 'results/baseline_best.pt'); r[0].show()"
+```
+
+或使用 Jupyter Notebook 交互式演示：
+
+```bash
+jupyter notebook code/demo.ipynb
+```
+
+### 4. 模型评估与可视化
 
 ```bash
 python code\eval.py
@@ -143,7 +157,7 @@ python code\eval.py
 | 5 | 误检漏检分析 | `false_detection_analysis.png` | 可视化 TP/FP/FN 案例及统计 |
 | 6 | 评估报告 | `eval_report.txt` | 汇总全部数值指标 |
 
-### 4. 单图预测
+### 5. 单图预测
 
 ```python
 from model import TrafficSignDetector
@@ -153,7 +167,7 @@ results = detector.predict("path/to/image.jpg", "results/baseline_best.pt", conf
 results[0].show()  # 显示检测结果
 ```
 
-### 5. 模型导出（ONNX）
+### 6. 模型导出（ONNX）
 
 ```python
 from model import TrafficSignDetector
@@ -161,6 +175,45 @@ from model import TrafficSignDetector
 detector = TrafficSignDetector()
 detector.export_onnx("results/baseline_best.pt", "results/model.onnx")
 ```
+
+## 实验结果
+
+### 性能指标对比
+
+| 指标 | 基准模型 (Baseline) | 改进模型 (Improved) | 提升幅度 |
+|------|:-------------------:|:-------------------:|:--------:|
+| mAP@0.5 | **86.85%** | **90.15%** | **+3.30%** |
+| mAP@0.5:0.95 | 72.11% | **72.28%** | +0.17% |
+| Precision (精确率) | **93.70%** | 92.45% | -1.25% |
+| Recall (召回率) | 79.01% | **88.95%** | **+9.94%** |
+| F1-score | 85.73% | **90.67%** | **+4.94%** |
+
+> 改进策略在保持高精确率的同时，大幅提升了召回率（+9.94%），
+> 表明强数据增强和余弦退火调度有效提升了模型的泛化能力，
+> 减少了漏检情况，综合 F1-score 提升 4.94%。
+
+### 场景适应性分析
+
+| 场景 | mAP@0.5 | 说明 |
+|------|:-------:|------|
+| 明亮 (Bright) | — | 高光照条件下的检测表现 |
+| 正常 (Normal) | — | 常规光照下的检测表现 |
+| 低光 (Dark) | — | 夜间/弱光环境下的检测表现 |
+| 模糊 (Blurry) | — | 运动模糊/失焦情况下的检测表现 |
+
+> 各场景详细数据由 `eval.py` 的场景分析模块自动生成，
+> 结果详见 `results/comparison_table.png`。
+
+### 评估输出文件
+
+| 文件 | 内容 |
+|------|------|
+| `results/loss_curve.png` | 训练损失曲线 |
+| `results/confusion_matrix.png` | 混淆矩阵热力图 |
+| `results/comparison_table.png` | 多场景性能对比表 |
+| `results/false_detection_analysis.png` | 误检/漏检案例分析 |
+| `results/eval_report.txt` | 数值评估报告 |
+| `results/comparison.json` | 结构化对比数据 |
 
 ## 类别说明
 
@@ -221,4 +274,3 @@ traffic_sign_project/                          # 项目根目录
 | Precision | — | 检测结果的准确率（TP/(TP+FP)） |
 | Recall | — | 检测结果的召回率（TP/(TP+FN)） |
 | 场景适应性 | — | 分别在明亮/正常/低光/模糊场景下的表现对比 |
-
